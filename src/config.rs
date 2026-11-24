@@ -113,8 +113,8 @@ const CHARS: &[char] = &[
     'm', 'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
 ];
 
-pub const RENDEZVOUS_SERVERS: &[&str] = &["helplink.in"];
-pub const RS_PUB_KEY: &str = "sqOUmsB4wMlGljzMFBHsla7KPAypTF7V+9HItgJfsSI=";
+pub const RENDEZVOUS_SERVERS: &[&str] = &[];
+pub const RS_PUB_KEY: &str = "";
 
 pub const RENDEZVOUS_PORT: i32 = 21116;
 pub const RELAY_PORT: i32 = 21117;
@@ -1063,7 +1063,7 @@ impl Config {
                 .next()
                 .unwrap_or_default();
         }
-        if !rendezvous_server.contains(':') {
+        if !rendezvous_server.is_empty() && !rendezvous_server.contains(':') {
             rendezvous_server = format!("{rendezvous_server}:{RENDEZVOUS_PORT}");
         }
         rendezvous_server
@@ -2905,12 +2905,12 @@ pub fn is_disable_settings() -> bool {
 
 #[inline]
 pub fn is_disable_ab() -> bool {
-    is_some_hard_opton("disable-ab")
+    true
 }
 
 #[inline]
 pub fn is_disable_account() -> bool {
-    is_some_hard_opton("disable-account")
+    true
 }
 
 #[inline]
